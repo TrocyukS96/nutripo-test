@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/nutripo-test/static/css/main.568e2ee8.css",
-    "main.js": "/nutripo-test/static/js/main.e8684c9b.js",
+    "main.js": "/nutripo-test/static/js/main.3637d913.js",
     "index.html": "/nutripo-test/index.html",
     "main.568e2ee8.css.map": "/nutripo-test/static/css/main.568e2ee8.css.map",
-    "main.e8684c9b.js.map": "/nutripo-test/static/js/main.e8684c9b.js.map"
+    "main.3637d913.js.map": "/nutripo-test/static/js/main.3637d913.js.map"
   },
   "entrypoints": [
     "static/css/main.568e2ee8.css",
-    "static/js/main.e8684c9b.js"
+    "static/js/main.3637d913.js"
   ]
 }
