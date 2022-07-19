@@ -1,11 +1,36 @@
-.workSpace{
+@import "./../../styles/vars.module";
+.workSpace {
   margin-top: 30px;
+  height: 90vh;
+  border:2px solid;
+  border-radius: 8px;
+  background-color: $phoneColor;
+  padding: 15px;
 
-  .title{
+  .title {
     text-align: center;
   }
-  .tableBlock,.pagination{
+
+  .tableBlock, .pagination {
     margin-top: 10px;
+  }
+
+  .tableBlock {
+    & > div {
+      &:nth-child(1) {
+        background-color: $mainColor;
+      }
+    }
+  }
+
+  .searchPanel {
+    text-align: right;
+
+    input {
+      padding-left: 5px;
+      height: 40px;
+      font-size: 18px;
+    }
   }
 
 }

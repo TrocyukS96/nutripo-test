@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import {productActions, productsSelectors} from "../../redux";
 import {useActions} from "../../utils/redux-utils";
 import {getIntervalsFromArr} from "../../utils/getIntervalFromArray";
+import {portionSize} from "../../redux/selectors";
 
 export const Pagination = React.memo(() => {
 
@@ -13,6 +14,7 @@ export const Pagination = React.memo(() => {
     const pageCount = useSelector(productsSelectors.pageCount)
     const [pageCountValue, setPageCountValue] = useState(pageCount)
     const [currentPage,setCurrentPage]=useState(page)
+    const CurrentPortionSize = useSelector(portionSize)
 
     let pagesCount = Math.ceil(total! / pageCountValue);
     console.log(total!)
@@ -29,6 +31,11 @@ export const Pagination = React.memo(() => {
     useEffect(() => {
         fetchProducts({data: getIntervalsFromArr(total, pageCountValue, 1)})
     }, [pageCountValue])
+
+    let portionCount = Math.ceil(pagesCount / CurrentPortionSize);
+    let [portionNumber, setPortionNumber] = useState(1);
+    let leftPortionPageNumber = (portionNumber - 1) * CurrentPortionSize + 1;
+    let rightPortionPageNumber = portionNumber * CurrentPortionSize;
 
     const pagesOptions = [5, 10, 15]
     const pagesOptionsTags = pagesOptions.map(item => <option value={item} key={item}>{item}</option>)
@@ -47,8 +54,16 @@ export const Pagination = React.memo(() => {
             <div className={s.paginatorContainer}>
                 <div className={s.pageContainer}>
                     <div className={s.pageNumbersBlock}>
+                        {portionNumber > 1 &&
+                            <button
+                                className={s.paginatorBtn}
+                                disabled={!(portionNumber > 1)}
+                                onClick={() => setPortionNumber(portionNumber - 1)}>
+                                {'<<<'}
+                            </button>}
                         {
                             pages
+                                .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                                 .map((p, i) => {
                                     console.log('page ->'+page)
                                     return <div className={`${s.pageNumber} ${p === currentPage ? s.selectedPage : ''}`}
@@ -60,17 +75,23 @@ export const Pagination = React.memo(() => {
                                 })
                         }
                     </div>
-
+                    {portionCount > portionNumber &&
+                        <button
+                            className={s.paginatorBtn}
+                            disabled={!(portionCount > portionNumber)}
+                            onClick={() => setPortionNumber(portionNumber + 1)}>
+                            {'>>>'}
+                        </button>}
                 </div>
                 <div className={s.selectWrapper}>
-                    Show
+                    <span className={s.span}>Show</span>
                     <select name="pagesCountSelect"
                             id="pagesCountSelect"
                             value={pageCountValue}
                             onChange={onPagesCountChangeHandler}>
                         {pagesOptionsTags}
                     </select>
-                    Cards per page
+                    <span>cards per page</span>
                 </div>
             </div>
         </div>

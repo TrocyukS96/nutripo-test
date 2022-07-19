@@ -2,9 +2,9 @@ import {FC} from "react";
 import s from './index.module.scss';
 
 interface IProps {
-    id: number
+    id: number | string
     name: string
-    standart_serving: number
+    standart_serving: number | string
 }
 
 export const Row: FC<IProps> = ({
