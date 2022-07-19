@@ -1,0 +1,19 @@
+.row{
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  .item{
+    padding: 3px;
+    border: 1px solid;
+
+    &:nth-child(1){
+      text-align: center;
+    }
+    &:nth-child(1){
+      padding: 0 0 0 10px;
+    }
+    &:nth-child(3){
+      text-align: center;
+    }
+  }
+
+}
