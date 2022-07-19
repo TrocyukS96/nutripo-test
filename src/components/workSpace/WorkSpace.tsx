@@ -6,6 +6,7 @@ import {Row} from "../row/Row";
 import {Pagination} from "../pagination/Pagination";
 import {Product} from "../../api/types";
 import {toFilterCards} from "../../utils/toFIlterCards";
+import {Preloader} from "../preloader/Preloader";
 
 export const WorkSpace: FC = () => {
     const products = useSelector(productsSelectors.products)
@@ -42,8 +43,9 @@ export const WorkSpace: FC = () => {
             <div className={s.tableBlock}>
                 <Row id={'ID'} name={'Name'} standart_serving={'Standart serving'}/>
                 {status === 'succeeded' ? renderCardsHandler()
-                    : <div>Loading ...</div>
+                    : <Preloader/>
                 }
+
             </div>
             <Pagination/>
         </div>
