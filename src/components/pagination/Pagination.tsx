@@ -17,32 +17,29 @@ export const Pagination = React.memo(() => {
     const CurrentPortionSize = useSelector(portionSize)
 
     let pagesCount = Math.ceil(total! / pageCountValue);
-    console.log(total!)
-    console.log(pagesCount)
-    //Todo change 10 value
-
 
     let pages: number[] = [];
 
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+    const pagesOptions = [5, 10, 15]
 
     useEffect(() => {
+        debugger
         fetchProducts({data: getIntervalsFromArr(total, pageCountValue, 1)})
-    }, [pageCountValue])
+    }, [pagesOptions])
 
     let portionCount = Math.ceil(pagesCount / CurrentPortionSize);
     let [portionNumber, setPortionNumber] = useState(1);
     let leftPortionPageNumber = (portionNumber - 1) * CurrentPortionSize + 1;
     let rightPortionPageNumber = portionNumber * CurrentPortionSize;
 
-    const pagesOptions = [5, 10, 15]
     const pagesOptionsTags = pagesOptions.map(item => <option value={item} key={item}>{item}</option>)
 
     const pagesCountPacksChange = (value: number) => {
+        fetchProducts({data: getIntervalsFromArr(total, value, 1)})
         setPageCountValue(value)
-        fetchProducts({data: getIntervalsFromArr(total, pageCountValue, 1)})
     }
 
     const onPagesCountChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {

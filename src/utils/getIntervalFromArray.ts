@@ -1,7 +1,7 @@
-export const getIntervalsFromArr = (total: number, pageCount: number,intervalValue:number) => {
+export const getIntervalsFromArr = (total: number, pageCount: number, intervalValue: number) => {
     const resultArr = []
     let iterationCount = 0
-    pageCount = pageCount-1
+    pageCount = pageCount - 1
     let startValue = 0
     let endValue = pageCount
 
@@ -17,12 +17,12 @@ export const getIntervalsFromArr = (total: number, pageCount: number,intervalVal
             endValue += pageCount
             total -= pageCount
         }
-        if(total<=pageCount){
-            resultArr.push([startValue,endValue+total])
+        if (total <= pageCount) {
+            resultArr.push([startValue, endValue + total])
         }
 
     }
 
-    return resultArr[intervalValue-1]
+    return resultArr[intervalValue - 1]
 
 }
